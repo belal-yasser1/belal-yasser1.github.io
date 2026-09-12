@@ -1,1 +1,547 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belal — Machine Learning & AI Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #14181f;
+    --bg-raised: #191e26;
+    --ink: #eae6dc;
+    --ink-dim: #8e97a6;
+    --ink-faint: #5b6270;
+    --accent: #e8a33d;
+    --accent-dim: #b8813262;
+    --line: #262c37;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection{ background: var(--accent-dim); color: var(--ink); }
+
+  a{ color: var(--ink); text-decoration-color: var(--ink-faint); text-underline-offset: 3px; }
+  a:hover{ color: var(--accent); text-decoration-color: var(--accent); }
+
+  .wrap{
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  header.top{
+    position: sticky;
+    top: 0;
+    background: rgba(20,24,31,0.88);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    z-index: 10;
+  }
+
+  .topbar{
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 16px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .topbar .mark{
+    font-size: 14px;
+    color: var(--ink-dim);
+  }
+
+  .topbar nav{
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+  }
+
+  .topbar nav a{ color: var(--ink-dim); }
+  .topbar nav a:hover{ color: var(--accent); }
+
+  section{
+    padding: 64px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  section:last-of-type{ border-bottom: none; }
+
+  h1,h2,h3{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .hero{
+    padding-top: 56px;
+  }
+
+  .hero h1{
+    font-size: clamp(2.4rem, 7vw, 3.4rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+  }
+
+  .hero .tagline{
+    margin-top: 18px;
+    color: var(--ink-dim);
+    font-size: 1.02rem;
+    max-width: 34ch;
+  }
+
+  .hero .tagline em{
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .hero-chart{
+    margin-top: 40px;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .fit-line{
+    stroke-dasharray: 480;
+    stroke-dashoffset: 480;
+    animation: draw 1.6s ease-out 0.3s forwards;
+  }
+
+  @keyframes draw{
+    to{ stroke-dashoffset: 0; }
+  }
+
+  .dot{ animation: fade-in 0.6s ease-out both; }
+
+  @keyframes fade-in{
+    from{ opacity: 0; }
+    to{ opacity: 1; }
+  }
+
+  h2.section-title{
+    font-size: 1.5rem;
+    margin-bottom: 28px;
+  }
+
+  p{ margin: 0 0 16px; }
+  p:last-child{ margin-bottom: 0; }
+
+  .about p{
+    color: #d7d3c8;
+    max-width: 56ch;
+  }
+
+  .grid-skills{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 32px;
+  }
+
+  .skill-group h3{
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.82rem;
+    color: var(--ink-dim);
+    margin-bottom: 10px;
+  }
+
+  .skill-group ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.92rem;
+  }
+
+  .skill-group li{
+    padding: 5px 0;
+    border-top: 1px solid var(--line);
+    color: #d7d3c8;
+  }
+  .skill-group li:first-child{ border-top: none; }
+
+  .path-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .path-list li{
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+  }
+  .path-list li:first-child{ border-top: none; }
+
+  .path-list .dotmark{
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .path-list .label{
+    font-family: 'Fraunces', serif;
+    font-size: 1.02rem;
+    margin-bottom: 3px;
+  }
+
+  .path-list .desc{
+    color: var(--ink-dim);
+    font-size: 0.9rem;
+  }
+
+  .curriculum{
+    margin-top: 36px;
+  }
+
+  .curriculum .subhead{
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.82rem;
+    color: var(--ink-dim);
+    margin-bottom: 14px;
+  }
+
+  .curriculum-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .curriculum-list li{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    font-size: 0.92rem;
+  }
+  .curriculum-list li:first-child{ border-top: none; }
+
+  .curriculum-list .topic{
+    color: #d7d3c8;
+  }
+
+  .curriculum-list .hours{
+    color: var(--ink-faint);
+    font-size: 0.82rem;
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: 14px;
+  }
+
+  .curriculum-list .status{
+    font-size: 0.78rem;
+    flex-shrink: 0;
+    min-width: 78px;
+    text-align: right;
+  }
+
+  .curriculum-list .status.done{ color: var(--accent); }
+  .curriculum-list .status.active{ color: var(--ink); }
+  .curriculum-list .status.upcoming{ color: var(--ink-faint); }
+
+  .project{
+    border: 1px solid var(--line);
+    background: var(--bg-raised);
+    padding: 26px 26px 22px;
+    border-radius: 4px;
+  }
+
+  .project h3{
+    font-size: 1.25rem;
+    margin-bottom: 6px;
+  }
+
+  .project .stack{
+    color: var(--accent);
+    font-size: 0.82rem;
+    margin-bottom: 14px;
+  }
+
+  .project p{
+    color: #d7d3c8;
+    font-size: 0.94rem;
+    max-width: 54ch;
+  }
+
+  .project .status{
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    border-top: 1px dashed var(--line);
+    padding-top: 12px;
+    width: 100%;
+  }
+
+  .project a.repo{
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 0.88rem;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink-faint);
+  }
+
+  .edu-line{
+    color: #d7d3c8;
+    font-size: 0.98rem;
+  }
+
+  .edu-line .school{
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  footer{
+    padding: 56px 0 72px;
+  }
+
+  footer h2{
+    font-size: 1.6rem;
+    margin-bottom: 14px;
+  }
+
+  footer p{
+    color: var(--ink-dim);
+    max-width: 44ch;
+  }
+
+  .contact-links{
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    font-size: 0.94rem;
+  }
+
+  .foot-note{
+    margin-top: 48px;
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 560px){
+    .grid-skills{ grid-template-columns: 1fr; }
+    section{ padding: 48px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .fit-line, .dot{ animation: none; stroke-dashoffset: 0; opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="topbar">
+    <span class="mark">belal</span>
+    <nav>
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#path">path</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>Belal</h1>
+    <p class="tagline">Computer science background, headed toward <em>machine learning &amp; AI engineering</em>. I build small tools first, then figure out how to make them predict something.</p>
+
+    <svg class="hero-chart" viewBox="0 0 620 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Scatter plot with a fitted regression line">
+      <line x1="40" y1="180" x2="600" y2="180" stroke="#262c37" stroke-width="1"/>
+      <line x1="40" y1="20" x2="40" y2="180" stroke="#262c37" stroke-width="1"/>
+
+      <circle class="dot" style="animation-delay:.1s"  cx="80"  cy="150" r="4" fill="#8e97a6"/>
+      <circle class="dot" style="animation-delay:.18s" cx="130" cy="160" r="4" fill="#8e97a6"/>
+      <circle class="dot" style="animation-delay:.26s" cx="175" cy="120" r="4" fill="#8e97a6"/>
+      <circle class="dot" style="animation-delay:.34s" cx="220" cy="135" r="4" fill="#8e97a6"/>
+      <circle class="dot" style="animation-delay:.42s" cx="260" cy="95"  r="4" fill="#8e97a6"/>
+      <circle class="dot" style="animation-delay:.5s"  cx="305" cy="110" r="4" fill="#8e97a6"/>
+      <circle class="dot" style="animation-delay:.58s" cx="350" cy="75"  r="4" fill="#8e97a6"/>
+      <circle class="dot" style="animation-delay:.66s" cx="395" cy="88"  r="4" fill="#8e97a6"/>
+      <circle class="dot" style="animation-delay:.74s" cx="440" cy="55"  r="4" fill="#8e97a6"/>
+      <circle class="dot" style="animation-delay:.82s" cx="485" cy="65"  r="4" fill="#8e97a6"/>
+      <circle class="dot" style="animation-delay:.9s"  cx="530" cy="35"  r="4" fill="#8e97a6"/>
+      <circle class="dot" style="animation-delay:.98s" cx="570" cy="45"  r="4" fill="#8e97a6"/>
+
+      <line class="fit-line" x1="60" y1="168" x2="590" y2="28" stroke="#e8a33d" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title">About</h2>
+    <div class="about">
+      <p>I came into computer science with C++ already under my belt, and picked up Python, Java, and SQL along the way. Somewhere in the middle of a lot of pandas dataframes and LeetCode problems, machine learning became the thing I actually wanted to get good at — not just pass a course in.</p>
+      <p>Right now that means going deep on the math and modeling side while staying comfortable across the rest of the stack: data cleaning, basic web fundamentals, and enough cloud tooling to actually ship a model rather than leave it in a notebook.</p>
+      <p class="edu-line"><span class="school">Computer Science</span> — October 6 University, Egypt. Specializing this year in Machine Learning &amp; AI.</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="grid-skills">
+      <div class="skill-group">
+        <h3>Languages</h3>
+        <ul>
+          <li>Python</li>
+          <li>Java</li>
+          <li>C++</li>
+          <li>SQL</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Data &amp; ML</h3>
+        <ul>
+          <li>Pandas / NumPy</li>
+          <li>scikit-learn</li>
+          <li>Linear &amp; polynomial regression</li>
+          <li>Data cleaning &amp; preprocessing</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Cloud &amp; Tools</h3>
+        <ul>
+          <li>Azure AI services</li>
+          <li>Git &amp; GitHub</li>
+          <li>FastAPI fundamentals</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Web &amp; Practice</h3>
+        <ul>
+          <li>HTML fundamentals</li>
+          <li>Node.js basics</li>
+          <li>Algorithmic problem solving (LeetCode)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="project">
+      <h3>Student Grade Tracker</h3>
+      <div class="stack">Python · Pandas · CSV</div>
+      <p>A command-line tool for recording, saving, and reloading student grades, built around a persistent CSV store and a menu-driven interface.</p>
+      <a class="repo" href="https://github.com/belal-yasser1/student-grade-tracker" target="_blank" rel="noopener">github.com/belal-yasser1/student-grade-tracker</a>
+      <div class="status">In progress: upgrading this into a Grade Predictor using scikit-learn linear regression on study time, attendance, and past grades.</div>
+    </div>
+  </section>
+
+  <section id="path">
+    <h2 class="section-title">Current path</h2>
+    <ul class="path-list">
+      <li>
+        <span class="dotmark">·</span>
+        <div>
+          <div class="label">DEPI — Microsoft ML Engineer Track</div>
+          <div class="desc">A 120-hour program covering math, preprocessing, classical ML, deep learning, NLP, computer vision, and Azure — running July 2026 to February 2027.</div>
+        </div>
+      </li>
+      <li>
+        <span class="dotmark">·</span>
+        <div>
+          <div class="label">Azure AI-900 &amp; AI-102</div>
+          <div class="desc">Working toward Microsoft's Azure AI certifications as part of the same track.</div>
+        </div>
+      </li>
+      <li>
+        <span class="dotmark">·</span>
+        <div>
+          <div class="label">Full-stack literacy</div>
+          <div class="desc">Learning HTML and Node.js fundamentals so I can connect a model to something people can actually use.</div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="curriculum">
+      <div class="subhead">DEPI curriculum — 120 hours</div>
+      <ul class="curriculum-list">
+        <li>
+          <span class="topic">Math for ML</span>
+          <span class="hours">6h</span>
+          <span class="status done">done</span>
+        </li>
+        <li>
+          <span class="topic">Python</span>
+          <span class="hours">12h</span>
+          <span class="status done">done</span>
+        </li>
+        <li>
+          <span class="topic">Preprocessing &amp; visualization</span>
+          <span class="hours">15h</span>
+          <span class="status done">done</span>
+        </li>
+        <li>
+          <span class="topic">Machine learning</span>
+          <span class="hours">24h</span>
+          <span class="status active">in progress</span>
+        </li>
+        <li>
+          <span class="topic">Deep learning</span>
+          <span class="hours">9h</span>
+          <span class="status upcoming">upcoming</span>
+        </li>
+        <li>
+          <span class="topic">NLP</span>
+          <span class="hours">18h</span>
+          <span class="status upcoming">upcoming</span>
+        </li>
+        <li>
+          <span class="topic">Computer vision</span>
+          <span class="hours">15h</span>
+          <span class="status upcoming">upcoming</span>
+        </li>
+        <li>
+          <span class="topic">Azure</span>
+          <span class="hours">18h</span>
+          <span class="status upcoming">upcoming</span>
+        </li>
+        <li>
+          <span class="topic">MLFlow</span>
+          <span class="hours">3h</span>
+          <span class="status upcoming">upcoming</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <h2>Get in touch</h2>
+    <p>Open to internships and junior ML/AI roles. The fastest way to reach me is below.</p>
+    <div class="contact-links">
+      <a href="https://github.com/belal-yasser1" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:belal.yasser206@gmail.com">belal.yasser206@gmail.com</a>
+      <a href="#">LinkedIn</a>
+    </div>
+    <div class="foot-note">Replace the email and LinkedIn placeholders above with your real details before sharing this.</div>
+  </footer>
+
+</main>
+
+</body>
+</html>
